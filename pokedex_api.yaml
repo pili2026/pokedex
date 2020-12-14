@@ -1,0 +1,164 @@
+swagger: "2.0"
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 1.0.0
+host: api.example.com
+tags:
+  - name: "pokedex"
+    description: "pokedex"
+    externalDocs:
+      description: "Find out more"
+      url: "http://localhost:5000"
+
+schemes:
+  - http
+paths:
+  /pokemon:
+    post:
+      tags:
+        - "property"
+      summary: create pokemon.
+      description: create pokemon.
+      operationId: "PostPokemon"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Post new pokemon"
+          required: true
+          schema:
+            items:
+              $ref: "#/definitions/Property"
+      responses:
+        "200":
+          schema:
+            items:
+              $ref: "#/definitions/Property"
+          description: "successful"
+        "400":
+          description: "Invalid status value"
+  /pokemon/{region}/{number}:
+    get:
+      tags:
+        - "property"
+      summary: Returns specify pokemon.
+      description: Returns specify pokemon
+      operationId: "getPokemon"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Returns a list of users"
+          required: true
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Property"
+      responses:
+        "200":
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Property"
+          description: "successful"
+        "404":
+          description: "Invalid status value"
+    put:
+      tags:
+        - "property"
+      summary: Update specify pokemon.
+      description: Update specify pokemon.
+      operationId: "updatePokemon"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Update specify Pokemon"
+          required: true
+          schema:
+            $ref: "#/definitions/Property"
+      responses:
+        "200":
+          schema:
+            $ref: "#/definitions/Property"
+          description: "successful"
+        "400":
+          description: "Invalid status value"
+    delete:
+      tags:
+        - "property"
+      summary: Delete pokemon.
+      description: Delete pokemon.
+      operationId: "deletePokemon"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: "successful"
+        "400":
+          description: "Invalid status value"
+  /pokemons:
+    post:
+      tags:
+        - "Types"
+      summary: Get specif pokemons.
+      description: Get specif pokemons.
+      operationId: "PostPokemons"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Get specif pokemons"
+          required: true
+          schema:
+            items:
+              $ref: "#/definitions/Types"
+      responses:
+        "200":
+          schema:
+            items:
+              $ref: "#/definitions/Types"
+          description: "successful"
+        "400":
+          description: "Invalid status value"
+
+
+definitions:
+  Property:
+    type: "object"
+    properties:
+      number:
+        type: "string"
+        example: "002"
+      name:
+        type: "string"
+        example: "Ivysaur"
+      region:
+        type: "string"
+        example: "kando"
+      evolution:
+        type: "boolean"
+        example: true
+      types:
+        type: "array"
+        items:
+          type: "string"
+      evolutions:
+        type: "object"
+        properties:
+          id:
+            $ref: "#/definitions/MongoObjId"
+  Types:
+    type: "array"
+    items:
+      type: "string"
+
+  MongoObjId:
+    type: string
+    format: ObjectId
+    pattern: '^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)'
