@@ -9,8 +9,12 @@ Pokedex
 * Flask
 * Docker
 
+### Test tool
+* Curl
+* Postman
+
 ### API
-[Api document](https://github.com/pili2026/pokedex/blob/main/pokedex_api.yaml)
+[Api document(Swagger)](https://github.com/pili2026/pokedex/blob/main/pokedex_api.yaml)
 
 ### Docker
 
